@@ -902,6 +902,29 @@ button {
   background: #999
 }
 
+footer {
+  height: 430px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--card-color);
+}
+
+
+footer section ul {
+  max-width: 200px;
+  margin: 20px 0;
+}
+
+.footer-authors {
+  border-top: 1px solid var(--text-color);
+  padding-top: 20px;
+  font-size: var(--small-font-size);
+}
+
 
 .show-modal {
   top: 0;
@@ -1178,6 +1201,25 @@ button {
 
 .header .nav .menu__list-link:hover {
     color: var(--first-color)
+}
+
+footer {
+  height: 290px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: left;
+  padding-bottom: 0;
+}
+
+footer section {
+  margin: 10px 0;
+  display: flex;
+}
+
+footer section ul {
+  margin: 0 10px;
+  max-width: 200px;
 }
 }
 
