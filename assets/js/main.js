@@ -344,6 +344,10 @@ btnCloseModal.addEventListener("click", () => {
   modal.style = ''
 })
 
+btnMenu.addEventListener("click", () => {
+    menu.classList.add("show--menu");
+})
+
 
 btnCloseMenu.addEventListener("click", () => {
     menu.classList.remove("show--menu");
@@ -353,9 +357,6 @@ btnCloseCart.addEventListener("click", () => {
     cart.classList.remove("show--cart");
 })
 
-btnMenu.addEventListener("click", () => {
-    menu.classList.add("show--menu");
-})
 
 btnCart.addEventListener("click", () => {
     cart.classList.add("show--cart");

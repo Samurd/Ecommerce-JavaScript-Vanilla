@@ -370,7 +370,6 @@ button {
   text-transform: uppercase
 }
 
-
 .header .nav .show--menu {
   left: 0
 }
@@ -378,7 +377,7 @@ button {
 .header .nav .menu__list {
   display: flex;
   flex-direction: column;
-  padding-top: 60px
+  padding-top: 60px;
 }
 
 .header .nav .menu__list-link {
@@ -1151,6 +1150,10 @@ footer section ul {
       background-color: var(--first-color);
       z-index: var(--z-fixed);
       transition: .3s
+  }
+
+  .header .nav .show--menu {
+    left: 0
   }
 }
 
