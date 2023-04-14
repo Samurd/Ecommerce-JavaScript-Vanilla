@@ -100,7 +100,7 @@ function renderProducts (data) {
           </div>  
           <div class="product__actions">
             <button type="button" class="product__actions-btn product--add" data-id="1" onclick=addProduct(${element.id})>
-                <i class='bx bx-basket'></i> Agregar
+                <i class='bx bx-shopping-bag'></i> Agregar
             </button>
             <button type="button" class="product__actions-btn product--view" data-id="${element.id}"onclick=detailProduct(${element.id})>
                <i class='bx bx-show'></i> Detalles
