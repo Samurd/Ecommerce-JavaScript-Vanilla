@@ -882,7 +882,8 @@ button {
 .products__container .product__content-details .colors__color {
   width: 15px;
   height: 15px;
-  display: inline-block
+  display: inline-block;
+  border-radius: 100%;
 }
 
 .products__container .product__content-details .colors .color--black {
