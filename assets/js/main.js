@@ -94,18 +94,9 @@ function renderProducts (data) {
     data.forEach((element) => {
         products = products + `<article class="product">
         <div class="product__container">
-          <div class="product__overlay"></div>
           <div class="product__img">
             <img loading="lazy" src="${element.image}" alt="${element.name}">
             
-          </div>  
-          <div class="product__actions">
-            <button type="button" class="product__actions-btn product--add" data-id="1" onclick=addProduct(${element.id})>
-                <i class='bx bx-shopping-bag'></i> Agregar
-            </button>
-            <button type="button" class="product__actions-btn product--view" data-id="${element.id}"onclick=detailProduct(${element.id})>
-               <i class='bx bx-show'></i> Detalles
-            </button>
           </div>  
           <div class="product__content">
             <div class="product__content-info">
@@ -117,15 +108,14 @@ function renderProducts (data) {
               </span>
             </div>
             <div class="product__content-details">
-              <h4 class="detail__text">Medidas</h4>
-              <span class="sizes">XS, S, M, L, XL, XXL</span>
-              <h4 class="detail__text">Colores</h4>
-              <div class="colors">
-                <span class="colors__color color--black"></span>
-                <span class="colors__color color--blue"></span>
-                <span class="colors__color color--red"></span>
-                <span class="colors__color color--grey"></span>
-              </div>
+              <div class="product__actions">
+              <button type="button" class="product__actions-btn product--add" data-id="1" onclick=addProduct(${element.id})>
+                  <i class='bx bx-shopping-bag'></i> Agregar
+              </button>
+              <button type="button" class="product__actions-btn product--view" data-id="${element.id}"onclick=detailProduct(${element.id})>
+                 <i class='bx bx-show'></i> Detalles
+              </button>
+            </div>  
             </div>
           </div>
         </div>

@@ -712,55 +712,32 @@ button {
 
 .products__container .product__container {
   width: inherit;
-  height: 471px;
+  height: 510px;
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   overflow: hidden;
   margin: 0;
-  -webkit-transition: 100ms ease-out;
   transition: 100ms ease-out;
   border-radius: 10px;
 }
 
 .products__container .product__container:hover {
   box-shadow: 0px 5px 31px -1px rgba(0,0,0,.15);
-  height: 480px;
+  height: 510px;
 }
 
-.products__container .product__container:hover .product__overlay {
-  opacity: 1
+.products__container .product__container:hover .product__img {
+  transform: scale(1.1);
+  transition: 200ms ease;
 }
 
-.products__container .product__container:hover .product__img img {
-  transform: translateY(-10px)
-}
 
 .product__actions-btn {
   border-radius: 10px;
 }
 
-.products__container .product__container:hover .product__actions-btn {
-  opacity: 1;
-  visibility: visible
-}
-
-.products__container .product__container:hover .product__content {
-  bottom: 0
-}
-
-.products__container .product__overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: -webkit-linear-gradient(30deg, rgba(234, 73, 89, 0.2) 35%, rgba(151, 220, 223, 0.31) 75%);
-  background: linear-gradient(60deg, rgba(234, 73, 89, 0.2) 35%, rgba(151, 220, 223, 0.31) 75%);
-  opacity: 0;
-  transition: opacity .2s ease-in-out
-}
 
 .products__container .product__img {
   width: 100%;
@@ -786,17 +763,11 @@ button {
 }
 
 .products__container .product__actions {
-  position: absolute;
-  top: 50%;
-  left: 0;
-  width: 100%;
-  height: 100%;
   display: flex;
-  flex-direction: column;
-  justify-content: start;
   align-items: center;
-  gap: 1rem;
-  transform: translateY(-33%)
+  justify-content: center;
+  margin-top: 15px;
+  width: 100%;
 }
 
 .products__container .product__actions-btn {
@@ -804,40 +775,42 @@ button {
   color: var(--title-color);
   font-size: var(--normal-font-size);
   cursor: pointer;
-  opacity: 0;
-  visibility: hidden;
+  margin: 0 10px;
   transition: all 200ms ease-out;
-  background-color: var(--body-color);
 }
 
 .products__container .product__actions-btn:hover {
-  background-color: var(--container-color)
+  background-color: var(--border-color);
 }
 
 .products__container .product__content {
   position: absolute;
-  bottom: -115px;
+  bottom:0;
   left: 0;
   width: 100%;
   background: var(--container-color);
   padding: 24px;
-  transition: all 200ms ease-out
+  height: 295px;
+  transition: all 200ms ease-out;
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
 }
 
 .products__container .product__content-info {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: 1fr 35px;
-  align-items: center;
+  grid-template-rows: 1fr 25px;
+  padding: 5px 0;
   margin-bottom: 5px
 }
 
 .products__container .product__content-info .product__title {
   grid-column: span 3;
   font-family: var(--body-font);
-  font-size: var(--normal-font-size);
+  font-size: var(--small-font-size);
   font-weight: 600;
-  text-transform: uppercase
+  text-transform: uppercase;
 }
 
 .products__container .product__content-info .product__price {
@@ -863,44 +836,7 @@ button {
   font-size: var(--small-font-size)
 }
 
-.products__container .product__content-details {
-  display: grid;
-  row-gap: .20rem
-}
 
-.products__container .product__content-details .detail-text {
-  color: var(--title-color);
-  font-weight: var(--font-bold);
-  text-transform: uppercase
-}
-
-.products__container .product__content-details .colors {
-  display: flex;
-  gap: .25rem
-}
-
-.products__container .product__content-details .colors__color {
-  width: 15px;
-  height: 15px;
-  display: inline-block;
-  border-radius: 100%;
-}
-
-.products__container .product__content-details .colors .color--black {
-  background: #222
-}
-
-.products__container .product__content-details .colors .color--blue {
-  background: #00a8ff
-}
-
-.products__container .product__content-details .colors .color--red {
-  background: #e64959
-}
-
-.products__container .product__content-details .colors .color--grey {
-  background: #999
-}
 
 footer {
   height: 430px;
