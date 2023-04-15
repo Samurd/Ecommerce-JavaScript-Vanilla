@@ -1010,15 +1010,9 @@ footer section ul {
   font-size: var(--h2-font-size)
 }
 
-.modal__container .modal__content .modal__head .modal__sku {
-  grid-column: span 2;
-  font-size: var(--smaller-font-size);
-  color: var(--text-color-light)
-}
-
 .modal__container .modal__content .modal__head .modal__price {
-  grid-column: span 2;
-  justify-self: end;
+  grid-column: span 1;
+  justify-self: left;
   font-size: var(--h1-font-size)
 }
 
