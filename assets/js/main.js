@@ -23,6 +23,7 @@ const btnModalAdd = document.querySelector(".modal--add");
 const alertStockContainer = document.querySelector(".alert");
 const alertBtnAccept = document.querySelector(".alert--accept");
 const header = document.querySelector(".header");
+const btnCheckout = document.querySelector(".cart--checkout");
 
 let cartArray = [];
 
@@ -129,10 +130,12 @@ function renderProducts (data) {
           </div>
         </div>
       </article>`
+
     })
 
     containerProducts.innerHTML = products;
-    btnNotifyCart.classList.add("show--notify");
+
+
 }
 
 
@@ -153,6 +156,7 @@ async function detailProduct(idProduct) {
                 stockModal.textContent = `Disponibles: ${element.quantity}`   
             }
         }
+
 
     } catch {
         console.log(error);
@@ -308,6 +312,9 @@ function saveStorage() {
 }
 
 
+
+
+
 window.addEventListener("scroll", () => {
   if (window.scrollY > 0) {
     header.style = 'background-color: var(--container-color); box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.341); '
@@ -316,6 +323,20 @@ window.addEventListener("scroll", () => {
   }
 })
 
+
+btnCheckout.addEventListener("click", async () => {
+  const response = await fetch("https://ecommercebackend.fundamentos-29.repl.co/")
+  const data = await response.json()
+  for (const product of cartArray) {
+  const productFinded = data.find(prod => prod.id === product.id)
+  productFinded.count -= product.quantity
+
+}
+
+cartArray.length = []
+seeCartBody();
+
+});
 
 
 alertBtnAccept.addEventListener("click", () => alertStockContainer.style = '')
