@@ -279,10 +279,8 @@ btnDiscount.addEventListener("click", () => {
     if (code.name === inputDiscount.value) { 
       discountDefault = code.discount
       discountText.textContent = `${discountDefault}%`;
-      discountMessage.innerHTML += `<p class="text--message">Se ha aplicado el "<strong>${code.discount}%</strong>" de descuento <i class="bx bx-x btnCloseMessage"></i></p>`
+      discountMessage.innerHTML = `<p class="text--message">Se ha aplicado el "<strong>${code.discount}%</strong>" de descuento <i class="bx bx-x btnCloseMessage"></i></p>`
       totalText.textContent = `$${newPrice().toFixed(2)}`
-    } else {
-      discountMessage.innerHTML = `<p class="text--message">El codigo no es valido<i class="bx bx-x btnCloseMessage"></i></p>`
     }
   }
 
