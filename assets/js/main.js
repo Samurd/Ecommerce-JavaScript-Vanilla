@@ -24,6 +24,30 @@ const alertStockContainer = document.querySelector(".alert");
 const alertBtnAccept = document.querySelector(".alert--accept");
 const header = document.querySelector(".header");
 const btnCheckout = document.querySelector(".cart--checkout");
+const discountCart = document.querySelector(".cart--checkout");
+const btnDiscount= document.querySelector(".discount__form-btn");
+const inputDiscount = document.querySelector(".discount__form-input");
+const subTotal = document.querySelector(".cart--subtotal");
+const totalText = document.querySelector(".cart--total");
+const iva = document.querySelector(".cart--tax");
+const discountText = document.querySelector(".cart--discount");
+const discountMessage = document.querySelector(".discount__message");
+
+let ivaPorcent = 1.03
+let discountNumber = 0
+let discountDefault;
+
+let codesDiscount = [
+  {
+  name: "academlo",
+  discount: 90
+  },
+  {
+    name: "samuel",
+    discount: 20
+  }
+]
+
 
 let cartArray = [];
 
@@ -37,7 +61,9 @@ document.addEventListener("DOMContentLoaded", () => {
     darkTheme()
 })
 
+let total = (cart) => cart.reduce((acc, product) => acc + product.count * product.price * ivaPorcent, 0).toFixed(2);
 
+let newPrice = () => total(cartArray) * ((100 - discountDefault)) / 100;
 
 function load () {
   const load = document.getElementById('load')
@@ -101,11 +127,7 @@ function renderProducts (data) {
           <div class="product__content">
             <div class="product__content-info">
               <h3 class="product__title">${element.name}</h3>
-              <span class="product__price">$${element.price}</span>
-              <span class="product__category">${element.category}</span>
-              <span class="product__stock">
-                disponibles: <span class="product__stock-quantity">${element.quantity}</span>
-              </span>
+              <span class="product__price">$${element.price.toFixed(2)}</span>
             </div>
             <div class="product__content-details">
               <div class="product__actions">
@@ -180,6 +202,7 @@ async function addProduct(id) {
 }
 
 
+
 function confirmModalEmptyCart() {
   containerConfirmEmptyCart.style = 'animation: 300ms ease 0s 1 normal none running fade-in; top: 0'
   confirmMessage.textContent = `¿Quieres vaciar el carrito?`
@@ -237,14 +260,45 @@ function seeCartBody() {
         btnNotifyCart.classList.remove("show--notify")
     }
 
+    iva.textContent = `$${ivaPorcent}%`
+    discountText.textContent = `${discountNumber}%`
 
-    const subTotal = document.querySelector(".cart--subtotal")
     
-    subTotal.textContent = `$${cartArray.reduce((acc, product) => acc + product.count * product.price, 0)}`
+    subTotal.textContent = `$${cartArray.reduce((acc, product) => acc + product.count * product.price, 0).toFixed(2)}`
+
+    totalText.textContent = `$${total(cartArray)}`
 
     updateCartNotify()
     saveStorage();
 }
+
+
+    
+btnDiscount.addEventListener("click", () => {
+  for (const code of codesDiscount) {
+    if (code.name === inputDiscount.value) { 
+      discountDefault = code.discount
+      discountText.textContent = `${discountDefault}%`;
+      discountMessage.innerHTML += `<p class="text--message">Se ha aplicado el "<strong>${code.discount}%</strong>" de descuento <i class="bx bx-x btnCloseMessage"></i></p>`
+      totalText.textContent = `$${newPrice().toFixed(2)}`
+    } else {
+      discountMessage.innerHTML = `<p class="text--message">El codigo no es valido<i class="bx bx-x btnCloseMessage"></i></p>`
+    }
+  }
+
+  const btnCloseMessage = document.querySelector(".btnCloseMessage");
+  const message = document.querySelector(".text--message");
+  btnCloseMessage.addEventListener("click", () => {
+    discountText.textContent = `${discountNumber}%`
+    totalText.textContent = `$${total(cartArray)}`;
+  discountMessage.innerHTML = ``;
+  })
+
+
+});
+
+
+
 
 function removeCartWithMinus(id) {
   if (cartArray.some((prod) => prod.id === id)) {

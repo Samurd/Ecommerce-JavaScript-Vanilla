@@ -115,6 +115,10 @@ body.dark-theme {
   color: var(--title-color);
 }
 
+.dark-theme .cart__footer .discount__form-input {
+  color: var(--title-color);
+}
+
 /*======= BASE ========*/
 html {
   font-size: 16px;
@@ -384,7 +388,6 @@ button {
 .header .nav .menu__list-link {
   display: block;
   width: 100%;
-  padding: 1.25rem 2rem;
   font-weight: 600;
   color: var(--white-color);
   font-size: var(--normal-font-size);
@@ -411,7 +414,7 @@ button {
 
 .header .nav .actions__btn {
   font-size: 1.5rem;
-  margin: 0 7px;
+  margin: 0 4px;
   color: var(--title-color);
   background-color: rgba(0,0,0,0);
   cursor: pointer
@@ -448,12 +451,15 @@ button {
 
 .cart {
   position: fixed;
-  top: 0;
+  top: 0%;
+  bottom: 0%;
   right: -100%;
   max-width: 400px;
-  width: 100%;
-  height: 100vh;
+  width: 95%;
+  height: 95%;
+  margin: 15px 0;
   background-color: var(--container-color);
+  border-radius: 20px 0 0 20px;
   transition: .3s;
   z-index: var(--z-fixed);
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.28);
@@ -473,9 +479,11 @@ button {
 }
 
 .cart__header-btn {
-  font-size: 1.5rem;
+  font-size: 1.8rem;
+  padding: 5px 10px;
   color: var(--title-color);
-  background-color: rgba(0,0,0,0);
+  background-color: var(--border-color);
+  border-radius: 100%;
   cursor: pointer
 }
 
@@ -582,7 +590,8 @@ button {
   left: 0;
   width: 100%;
   padding: 0 1.5rem 1.5rem;
-  background-color: var(--body-color)
+  background-color: var(--body-color);
+  border-radius: 0 0 0 20px;
 }
 
 .cart__footer .discount {
@@ -602,14 +611,17 @@ button {
   border: none;
   outline: none;
   background-color: var(--card-color);
+  border-radius: 10px;
 }
 
 .cart__footer .discount__form-btn {
   padding: 1rem;
+  margin-left: 6px;
   color: var(--title-color);
   cursor: pointer;
   transition: background-color 200ms ease-in-out;
   background-color: var(--border-color);
+  border-radius: 10px;
 }
 
 .cart__footer .discount__form-btn:hover {
@@ -670,6 +682,7 @@ button {
   padding: 1rem;
   transition: background-color 200ms ease-in-out;
   background-color: var(--border-color);
+  border-radius: 10px;
 }
 
 .cart__footer .actions__btn:hover {
@@ -730,7 +743,7 @@ button {
 }
 
 .products__container .product__container:hover .product__img {
-  transform: scale(1.1);
+  transform: scale(1.2);
   transition: 200ms ease;
 }
 
@@ -767,6 +780,9 @@ button {
   display: flex;
   align-items: center;
   justify-content: center;
+  position: absolute;
+  left: 0;
+  top: 62%;
   margin-top: 0px;
   width: 100%;
 }
@@ -798,36 +814,33 @@ button {
 }
 
 .products__container .product__content-info {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: 1fr 25px;
-  padding: 5px 0;
-  margin-bottom: 5px
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .products__container .product__content-info .product__title {
-  grid-column: span 3;
+  text-align: left;
   font-family: var(--body-font);
   font-size: var(--small-font-size);
   font-weight: 600;
   text-transform: uppercase;
+  padding-right: 10px;
 }
 
 .products__container .product__content-info .product__price {
-  font-size: var(--h1-font-size);
-  font-weight: var(--font-bold);
-  color: var(--title-color);
-  justify-self: end
+  font-size: var(--h2-font-size);
+  margin: 10px 0;
+  font-weight: 400;
+  color: var(--text-color);
 }
 
 
 .products__container .product__content-info .product__category {
-  grid-column: span 2;
   color: var(--text-color)
 }
 
 .products__container .product__content-info .product__stock {
-  grid-column: span 2;
   font-size: var(--small-font-size);
   justify-self: end
 }
@@ -1131,7 +1144,8 @@ footer section ul {
   }
 
   .products__container .product__content-info .product__price {
-    font-size:var(--h2-font-size)
+    font-size:var(--h2-font-size);
+    margin: 0px;
   }
 
   .header .nav .menu__list {
@@ -1147,6 +1161,10 @@ footer section ul {
 
 .header .nav .menu__list-link:hover {
     color: var(--first-color)
+}
+
+.products__container .product__actions {
+  top: 32%;
 }
 
 footer {
