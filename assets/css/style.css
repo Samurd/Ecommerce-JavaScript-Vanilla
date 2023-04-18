@@ -822,6 +822,7 @@ footer section ul {
 
 .show-modal {
   top: 0;
+  animation: 300ms ease 0s 1 normal none running fade-in;
 }
 
 .modal {

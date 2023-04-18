@@ -298,7 +298,7 @@ function addCartWithPlus(id){
   cartArray.forEach(product => {
     if (product.count > product.quantity) {
       product.count = product.quantity
-      alertStockContainer.style = 'animation: 300ms ease 0s 1 normal none running fade-in; top: 0'
+      alertStockContainer.classList.add("show-modal")
     }
   })
 
@@ -352,7 +352,7 @@ seeCartBody();
 
 });
 
-alertBtnAccept.addEventListener("click", () => alertStockContainer.style = '')
+alertBtnAccept.addEventListener("click", () => alertStockContainer.classList.remove("show-modal"));
 
 
 btnCancelEmptyCartAccept.addEventListener("click", () => {
