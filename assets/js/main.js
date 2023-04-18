@@ -1,3 +1,5 @@
+// Variables //
+
 const btnMenu = document.querySelector(".btn--menu");
 const btnCart = document.querySelector(".btn--cart");
 const menu = document.querySelector(".menu");
@@ -33,23 +35,6 @@ const iva = document.querySelector(".cart--tax");
 const discountText = document.querySelector(".cart--discount");
 const discountMessage = document.querySelector(".discount__message");
 
-let ivaPorcent = 1.03
-let discountNumber = 0
-let discountDefault;
-
-let codesDiscount = [
-  {
-  name: "academlo",
-  discount: 90
-  },
-  {
-    name: "samuel",
-    discount: 20
-  }
-]
-
-
-let cartArray = [];
 
 
 
@@ -61,9 +46,6 @@ document.addEventListener("DOMContentLoaded", () => {
     darkTheme()
 })
 
-let total = (cart) => cart.reduce((acc, product) => acc + product.count * product.price * ivaPorcent, 0).toFixed(2);
-
-let newPrice = () => total(cartArray) * ((100 - discountDefault)) / 100;
 
 function load () {
   const load = document.getElementById('load')
@@ -131,7 +113,7 @@ function renderProducts (data) {
             </div>
             <div class="product__content-details">
               <div class="product__actions">
-              <button type="button" class="product__actions-btn product--add" data-id="1" onclick=addProduct(${element.id})>
+              <button type="button" class="product__actions-btn product--add" data-id="${element.id}" onclick=addProduct(${element.id})>
                   <i class='bx bx-shopping-bag'></i> Agregar
               </button>
               <button type="button" class="product__actions-btn product--view" data-id="${element.id}"onclick=detailProduct(${element.id})>
@@ -158,13 +140,13 @@ async function detailProduct(idProduct) {
 
         for (const element of data) {
             if (idProduct == element.id) {
-                modal.style = 'animation: 300ms ease 0s 1 normal none running fade-in; top: 0'
-                imageModal.src = element.image
-                imageModal.alt = element.name
-                titleModal.textContent = element.name
+                modal.classList.add("show-modal");
+                imageModal.src = element.image;
+                imageModal.alt = element.name;
+                titleModal.textContent = element.name;
                 priceModal.textContent = `$${element.price}`
-                descModal.textContent = element.description
-                categoryModal.textContent = element.category
+                descModal.textContent = element.description;
+                categoryModal.textContent = element.category;
                 stockModal.textContent = `Disponibles: ${element.quantity}`   
             }
         }
@@ -175,6 +157,28 @@ async function detailProduct(idProduct) {
     }
 }
 
+// CART ///
+
+let ivaPorcent = 1.03
+let discountNumber = 0
+let discountDefault;
+
+let codesDiscount = [
+  {
+  name: "academlo",
+  discount: 90
+  },
+  {
+    name: "samuel",
+    discount: 20
+  }
+]
+
+
+let cartArray = [];
+
+
+let total = (cart) => cart.reduce((acc, product) => acc + product.count * product.price * ivaPorcent, 0).toFixed(2);
 
 async function addProduct(id) {
     const response = await fetch("https://ecommercebackend.fundamentos-29.repl.co/")
@@ -204,7 +208,7 @@ async function addProduct(id) {
 
 
 function confirmModalEmptyCart() {
-  containerConfirmEmptyCart.style = 'animation: 300ms ease 0s 1 normal none running fade-in; top: 0'
+  containerConfirmEmptyCart.classList.add("show-modal");
   confirmMessage.textContent = `¿Quieres vaciar el carrito?`
   btnCancelEmptyCartAccept.style.display = 'flex'
   btnCancelEmptyCartAccept.textContent = 'Cancelar'
@@ -212,7 +216,7 @@ function confirmModalEmptyCart() {
 
 
  function ifTheCartIsEmpty () {
-  containerConfirmEmptyCart.style = 'animation: 300ms ease 0s 1 normal none running fade-in; top: 0'
+  containerConfirmEmptyCart.classList.add("show-modal");
   confirmMessage.textContent = `No hay productos para eliminar`
   btnCancelEmptyCartAccept.style.display = 'none'
  }
@@ -232,7 +236,7 @@ function seeCartBody() {
     
         <div class="article__header">
           <h3 class="article__title">${name}</h3>
-          <button type="button" class="article__remove" data-id="2" onclick=removeProduct(${id})>
+          <button type="button" class="article__remove" data-id="${id}" onclick=removeProduct(${id})>
              <i class='bx bx-trash' ></i>
           </button>
         </div>
@@ -240,11 +244,11 @@ function seeCartBody() {
         <div class="article__body">
           <span class="article__stock">${quantity} disponibles</span>
           <div class="article__quantity">
-            <button type="button" class="article__quantity-btn article--minus" data-id="2" onclick=removeCartWithMinus(${id})>
+            <button type="button" class="article__quantity-btn article--minus" data-id="${id}" onclick=removeCartWithMinus(${id})>
                 <i class='bx bx-minus'></i>
             </button>
             <span class="article__quantity-count">${count}</span>
-            <button type="button" class="article__quantity-btn article--plus" data-id="2" onclick=addCartWithPlus(${id})>
+            <button type="button" class="article__quantity-btn article--plus" data-id="${id}" onclick=addCartWithPlus(${id})>
                 <i class='bx bx-plus' ></i>
             </button>
           </div>
@@ -261,7 +265,6 @@ function seeCartBody() {
     }
 
     iva.textContent = `$${ivaPorcent}%`
-    discountText.textContent = `${discountNumber}%`
 
     
     subTotal.textContent = `$${cartArray.reduce((acc, product) => acc + product.count * product.price, 0).toFixed(2)}`
@@ -271,31 +274,6 @@ function seeCartBody() {
     updateCartNotify()
     saveStorage();
 }
-
-
-    
-btnDiscount.addEventListener("click", () => {
-  for (const code of codesDiscount) {
-    if (code.name === inputDiscount.value) { 
-      discountDefault = code.discount
-      discountText.textContent = `${discountDefault}%`;
-      discountMessage.innerHTML = `<p class="text--message">Se ha aplicado el "<strong>${code.discount}%</strong>" de descuento <i class="bx bx-x btnCloseMessage"></i></p>`
-      totalText.textContent = `$${newPrice().toFixed(2)}`
-    }
-  }
-
-  const btnCloseMessage = document.querySelector(".btnCloseMessage");
-  const message = document.querySelector(".text--message");
-  btnCloseMessage.addEventListener("click", () => {
-    discountText.textContent = `${discountNumber}%`
-    totalText.textContent = `$${total(cartArray)}`;
-  discountMessage.innerHTML = ``;
-  })
-
-
-});
-
-
 
 
 function removeCartWithMinus(id) {
@@ -366,32 +344,25 @@ window.addEventListener("scroll", () => {
 })
 
 
-btnCheckout.addEventListener("click", async () => {
-  const response = await fetch("https://ecommercebackend.fundamentos-29.repl.co/")
-  const data = await response.json()
-  for (const product of cartArray) {
-  const productFinded = data.find(prod => prod.id === product.id)
-  productFinded.count -= product.quantity
 
-}
+btnCheckout.addEventListener("click", () => {
 
 cartArray.length = []
 seeCartBody();
 
 });
 
-
 alertBtnAccept.addEventListener("click", () => alertStockContainer.style = '')
 
 
 btnCancelEmptyCartAccept.addEventListener("click", () => {
-  containerConfirmEmptyCart.style = ''
+  containerConfirmEmptyCart.classList.remove("show-modal")
 })
 
 btnConfirmEmptyCartAccept.addEventListener("click", () => {
   cartArray.length = []
+  containerConfirmEmptyCart.classList.remove("show-modal")
   seeCartBody();
-  containerConfirmEmptyCart.style = ''
 })
 
 emptyCart.addEventListener("click", () => {
@@ -401,11 +372,11 @@ emptyCart.addEventListener("click", () => {
   } else {
     ifTheCartIsEmpty()
   }
-})
+});
 
 btnCloseModal.addEventListener("click", () => {
-  modal.style = ''
-})
+  modal.classList.remove("show-modal");
+});
 
 btnMenu.addEventListener("click", () => {
     menu.classList.add("show--menu");
