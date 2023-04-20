@@ -34,9 +34,11 @@ const totalText = document.querySelector(".cart--total");
 const iva = document.querySelector(".cart--tax");
 const discountText = document.querySelector(".cart--discount");
 const discountMessage = document.querySelector(".discount__message");
+const notifyAddProduct = document.querySelector(".notifyAdd-product");
 
 
-
+const notifyShow = () => notifyAddProduct.classList.add("show-nofify--product");
+const removeNotifyAddProduct = () => setTimeout(() => {notifyAddProduct.classList.remove("show-nofify--product")}, 1300);
 
 document.addEventListener("DOMContentLoaded", () => {
     cartArray = JSON.parse(localStorage.getItem("cart")) || [];
@@ -194,16 +196,23 @@ async function addProduct(id) {
       cartArray.push(item)
     }
 
+    notifyShow();
+    removeNotifyAddProduct();
+
+
     cartArray.forEach(product => {
         if (product.count > product.quantity) {
           product.count = product.quantity
-          alertStockContainer.style = 'animation: 300ms ease 0s 1 normal none running fade-in; top: 0'
+          alertStockContainer.classList.add("show-modal");
+          notifyAddProduct.classList.remove("show-nofify--product")
         }
     })
     
     updateCartNotify()
     seeCartBody();
 }
+
+
 
 
 
@@ -342,7 +351,6 @@ window.addEventListener("scroll", () => {
     header.style = ''
   }
 })
-
 
 
 btnCheckout.addEventListener("click", () => {
